@@ -16,6 +16,24 @@
  */
 package org.jboss.aerogear.android.security;
 
+import android.content.Context;
+
+/**
+ * Classes which implement this interface are responsible for creating 
+ * Encryption services from a config object.
+ */
 public interface KeyServiceFactory {
+    
+    
+    /**
+     * 
+     * This method provides a EncryptionService.  Services MAY be cached and 
+     * reused or they may be new objects every time.
+     * 
+     * @param config config objects may provide any parameters they wish.
+     * @param context the Android Application Context
+     * @return A valid Encryption Service
+     */
+    public EncryptionService getService(CryptoConfig config, Context context);
     
 }
