@@ -132,7 +132,14 @@
             <groupId>org.jboss.aerogear</groupId>
             <artifactId>aerogear-crypto</artifactId>
             <version>${aerogear.crypto.version}</version>
-            <scope>compile</scope>
+            <scope>compile</scope>            
+            <type>jar</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>bouncycastle</groupId>
+                    <artifactId>bcprov-jdk16</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -150,6 +157,13 @@
         </dependency>
 
         <dependency>
+            <groupId>bouncycastle</groupId>
+            <artifactId>bcprov-jdk16</artifactId>
+            <version>140</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
@@ -162,7 +176,19 @@
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.madgag</groupId>
+            <artifactId>scprov-jdk15on</artifactId>
+            <version>1.47.0.3</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.madgag</groupId>
+            <artifactId>scpkix-jdk15on</artifactId>
+            <version>1.47.0.3</version>
+            <type>jar</type>
+        </dependency>
+        
     </dependencies>
 
     <build>
