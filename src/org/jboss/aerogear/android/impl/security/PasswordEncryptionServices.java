@@ -50,13 +50,13 @@ import org.jboss.aerogear.crypto.keys.KeyPair;
  * If a keystore does not exist, one will be created and saved on the device.
  * 
  */
-public class PasswordKeyServices extends AbstractEncryptionService implements EncryptionService {
+public class PasswordEncryptionServices extends AbstractEncryptionService implements EncryptionService {
 
-    private static final String TAG = PasswordKeyServices.class.getSimpleName();
+    private static final String TAG = PasswordEncryptionServices.class.getSimpleName();
     
     private final CryptoBox crypto;
     
-    public PasswordKeyServices(PasswordProtectedKeystoreCryptoConfig config, Context appContext) {
+    public PasswordEncryptionServices(PasswordProtectedKeystoreCryptoConfig config, Context appContext) {
         super(appContext);
         this.crypto = getCrypto(appContext, config);
     }

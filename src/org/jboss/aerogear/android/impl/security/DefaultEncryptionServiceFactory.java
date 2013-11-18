@@ -41,7 +41,7 @@ public class DefaultEncryptionServiceFactory implements EncryptionServiceFactory
     }
 
     private EncryptionService makePasswordKeyStoreService(CryptoConfig config, Context context) {
-        return new PasswordKeyServices((PasswordKeyServices.PasswordProtectedKeystoreCryptoConfig) config, context);
+        return new PasswordEncryptionServices((PasswordEncryptionServices.PasswordProtectedKeystoreCryptoConfig) config, context);
     }
     
 }
