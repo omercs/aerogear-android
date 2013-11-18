@@ -38,10 +38,10 @@ public class PassPhraseKeyServices extends AbstractEncryptionService implements 
     
     public PassPhraseKeyServices(Context appContext, PassPhraseCryptoConfig config) {
         super(appContext);
-        this.crypto = getCrypto(appContext, config);
+        this.crypto = getCrypto(config);
     }
     
-    private CryptoBox getCrypto(Context appContext, PassPhraseCryptoConfig config) {
+    private CryptoBox getCrypto(PassPhraseCryptoConfig config) {
         Pbkdf2 pbkdf2 = AeroGearCrypto.pbkdf2();
         byte[] rawPassword;
         
