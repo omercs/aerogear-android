@@ -35,23 +35,7 @@ public class KeyManager {
     public KeyManager() {
         serviceFactory = new DefaultKeyServiceFactory();
     }
-    
-    /**
-     * 
-     * This method will create a encryptionService based on the config object.
-     * Instances of this service will be accessible using the KeyManager#get(String name).
-     * The name parameter will be the lowercased simplename of config class.
-     * 
-     * 
-     * @param config the config object.  config.class.getSimpleName().toLowerCase() 
-     * will be used as a key to cache the service instance.
-     * @param context The Android Application Context.
-     * @return a encryption service.
-     */
-    public EncryptionService encryptionService(CryptoConfig config, Context context){
-        return encryptionService(config, config.getClass().getSimpleName().toLowerCase(), context);
-    }
-    
+
     /**
      * 
      * This method will create a encryptionService based on the config object.
