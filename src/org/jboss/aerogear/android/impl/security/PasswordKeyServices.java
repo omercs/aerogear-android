@@ -39,6 +39,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.jboss.aerogear.AeroGearCrypto;
 import org.jboss.aerogear.android.security.CryptoConfig;
 import org.jboss.aerogear.android.security.EncryptionService;
+import org.jboss.aerogear.android.security.EncryptionServiceType;
 import org.jboss.aerogear.crypto.CryptoBox;
 import org.jboss.aerogear.crypto.keys.KeyPair;
 
@@ -218,7 +219,10 @@ public class PasswordKeyServices extends AbstractEncryptionService implements En
             this.keyStoreFile = keyStoreFile;
         }
 
-        
+        @Override
+        public EncryptionServiceType getType() {
+            return EncryptionServiceTypes.PASSWORD_KEYSTORE;
+        }
         
     }
     

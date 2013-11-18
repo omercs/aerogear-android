@@ -22,6 +22,7 @@ import java.security.spec.InvalidKeySpecException;
 import org.jboss.aerogear.AeroGearCrypto;
 import org.jboss.aerogear.android.security.CryptoConfig;
 import org.jboss.aerogear.android.security.EncryptionService;
+import org.jboss.aerogear.android.security.EncryptionServiceType;
 import org.jboss.aerogear.crypto.CryptoBox;
 import org.jboss.aerogear.crypto.Random;
 import org.jboss.aerogear.crypto.keys.PrivateKey;
@@ -94,6 +95,11 @@ public class PassPhraseKeyServices extends AbstractEncryptionService implements 
         }
         
         
+        @Override
+        public EncryptionServiceType getType() {
+            return EncryptionServiceTypes.PASSPHRASE;
+        }
+
         
     }
 

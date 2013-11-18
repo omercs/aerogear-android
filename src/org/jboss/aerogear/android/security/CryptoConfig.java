@@ -21,4 +21,9 @@ package org.jboss.aerogear.android.security;
  */
 public interface CryptoConfig { 
     
+    /**
+     * 
+     * @return the type of this CryptoConfig.
+     */
+    public EncryptionServiceType getType();
 }
