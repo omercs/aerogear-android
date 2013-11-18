@@ -31,13 +31,13 @@ import org.jboss.aerogear.crypto.password.Pbkdf2;
 /**
  * This class generates a CryptoBox from a PassPhrase
  */
-public class PassPhraseKeyServices extends AbstractEncryptionService implements EncryptionService {
+public class PassphraseEncryptionServices extends AbstractEncryptionService implements EncryptionService {
 
-    private static final String TAG = PassPhraseKeyServices.class.getSimpleName();
+    private static final String TAG = PassphraseEncryptionServices.class.getSimpleName();
     
     private final CryptoBox crypto;
     
-    public PassPhraseKeyServices(Context appContext, PassPhraseCryptoConfig config) {
+    public PassphraseEncryptionServices(Context appContext, PassPhraseCryptoConfig config) {
         super(appContext);
         this.crypto = getCrypto(config);
     }
