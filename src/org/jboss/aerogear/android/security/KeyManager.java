@@ -42,12 +42,12 @@ public class KeyManager {
      * Instances of this service will be accessible using the KeyManager#get(String name).
      * 
      * 
-     * @param config the config object.  
      * @param name the name to cache the generated instance by.
+     * @param config the config object.  
      * @param context The Android Application Context.
      * @return a encryption service.
      */
-    public EncryptionService encryptionService(CryptoConfig config, String name, Context context){
+    public EncryptionService encryptionService(String name, CryptoConfig config, Context context){
         EncryptionService service = serviceFactory.getService(config, context);
         services.put(name, service);
         return service;
