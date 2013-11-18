@@ -31,8 +31,9 @@ public abstract class AbstractEncryptionService implements EncryptionService {
     private static final String APPLICATION_IV_KEY = "applicationIV";
     private static final SecureRandom RANDOM = new SecureRandom();
     private static final String TAG = AbstractEncryptionService.class.getSimpleName();
+    private static final int DEFAULT_IV_LENGHT = 1024;
     
-    protected static final byte[] INSTANCE_IV = AbstractEncryptionService.RANDOM.generateSeed(1024);
+    protected static final byte[] INSTANCE_IV = AbstractEncryptionService.RANDOM.generateSeed(DEFAULT_IV_LENGHT);
     protected final byte[] applicationIV;
     
     
