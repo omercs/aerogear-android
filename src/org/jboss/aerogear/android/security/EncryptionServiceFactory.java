@@ -22,7 +22,7 @@ import android.content.Context;
  * Classes which implement this interface are responsible for creating 
  * Encryption services from a config object.
  */
-public interface KeyServiceFactory {
+public interface EncryptionServiceFactory {
     
     
     /**

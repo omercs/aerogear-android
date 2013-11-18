@@ -19,21 +19,21 @@ package org.jboss.aerogear.android.security;
 import android.content.Context;
 import java.util.HashMap;
 import java.util.Map;
-import org.jboss.aerogear.android.impl.security.DefaultKeyServiceFactory;
+import org.jboss.aerogear.android.impl.security.DefaultEncryptionServiceFactory;
 
 
 public class KeyManager {
 
-    private final KeyServiceFactory serviceFactory;
+    private final EncryptionServiceFactory serviceFactory;
     
     private final Map<String, EncryptionService> services = new HashMap<String, EncryptionService>();
     
-    public KeyManager(KeyServiceFactory serviceFactory ) {
+    public KeyManager(EncryptionServiceFactory serviceFactory ) {
         this.serviceFactory = serviceFactory;
     }
     
     public KeyManager() {
-        serviceFactory = new DefaultKeyServiceFactory();
+        serviceFactory = new DefaultEncryptionServiceFactory();
     }
 
     /**

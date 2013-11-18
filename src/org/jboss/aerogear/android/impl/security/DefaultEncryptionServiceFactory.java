@@ -19,9 +19,9 @@ package org.jboss.aerogear.android.impl.security;
 import android.content.Context;
 import org.jboss.aerogear.android.security.CryptoConfig;
 import org.jboss.aerogear.android.security.EncryptionService;
-import org.jboss.aerogear.android.security.KeyServiceFactory;
+import org.jboss.aerogear.android.security.EncryptionServiceFactory;
 
-public class DefaultKeyServiceFactory implements KeyServiceFactory {
+public class DefaultEncryptionServiceFactory implements EncryptionServiceFactory {
 
    
     @Override
