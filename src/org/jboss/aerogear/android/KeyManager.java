@@ -14,12 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.aerogear.android.security;
+package org.jboss.aerogear.android;
 
 import android.content.Context;
 import java.util.HashMap;
 import java.util.Map;
 import org.jboss.aerogear.android.impl.security.DefaultEncryptionServiceFactory;
+import org.jboss.aerogear.android.security.CryptoConfig;
+import org.jboss.aerogear.android.security.EncryptionService;
+import org.jboss.aerogear.android.security.EncryptionServiceFactory;
 
 
 public class KeyManager {
