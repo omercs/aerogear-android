@@ -64,6 +64,23 @@ public final class PipeConfig {
         this.type = PipeTypes.REST;
     }
 
+    public PipeConfig(PipeConfig pipeConfig) {
+        this.baseURL= pipeConfig.baseURL;
+        this.name= pipeConfig.name;
+        this.endpoint= pipeConfig.endpoint;
+        this.type= pipeConfig.type;
+        this.pageConfig= pipeConfig.pageConfig;
+        this.authModule= pipeConfig.authModule;
+        this.handler= pipeConfig.handler;
+        this.timeout= pipeConfig.timeout;
+        this.responseParser= pipeConfig.responseParser;
+        
+        this.dataRoot= pipeConfig.dataRoot;
+        this.encoding= pipeConfig.encoding;
+        this.requestBuilder= pipeConfig.requestBuilder;
+        this.gsonBulder= pipeConfig.gsonBulder;
+    }
+    
     /**
      * @return The Name that Pipeline will use to reference Pipes built by this
      * configuration.

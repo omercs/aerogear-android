@@ -65,6 +65,15 @@ public final class StoreConfig {
     public StoreConfig() {
     }
 
+    public StoreConfig(StoreConfig storeConfig) {
+        this.builder = storeConfig.builder;
+        this.context = storeConfig.context;
+        this.idGenerator = storeConfig.idGenerator;
+        this.klass = storeConfig.klass;
+        this.passphrase = storeConfig.passphrase;
+        this.type = storeConfig.type;
+    }
+    
     public Context getContext() {
         return context;
     }
