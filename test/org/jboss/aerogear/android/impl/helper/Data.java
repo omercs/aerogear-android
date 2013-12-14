@@ -16,6 +16,7 @@
  */
 package org.jboss.aerogear.android.impl.helper;
 
+import java.util.Objects;
 import org.jboss.aerogear.android.RecordId;
 
 public class Data implements Comparable<Data> {
@@ -77,18 +78,30 @@ public class Data implements Comparable<Data> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-
-        Data data = (Data) o;
-
-        return !(id != null ? !id.equals(data.id) : data.id != null);
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Data other = (Data) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (this.enable != other.enable) {
+            return false;
+        }
+        return true;
     }
+
+    
 
     @Override
     public int hashCode() {
@@ -110,4 +123,11 @@ public class Data implements Comparable<Data> {
         return id.compareTo(data.id);
     }
 
+    @Override
+    public String toString() {
+        return "Data{" + "id=" + id + ", name=" + name + ", description=" + description + ", enable=" + enable + '}';
+    }
+
+    
+    
 }

@@ -61,7 +61,8 @@ public class SqlStoreTest {
     public void testSave() throws InterruptedException {
 
         Data data = new Data(10, "name", "description");
-        saveData(10, "name", "description");
+        data.setEnable(true);
+        saveData(10, "name", "description", true);
         Data readData = store.read(10);
         Assert.assertEquals(data, readData);
     }
@@ -223,6 +224,11 @@ public class SqlStoreTest {
     private void saveData(Integer id, String name, String desc) throws InterruptedException {
         open(store);
         store.save(new Data(id, name, desc));
+    }
+
+    private void saveData(Integer id, String name, String desc, boolean enable) throws InterruptedException {
+        open(store);
+        store.save(new Data(id, name, desc, enable));
     }
 
     @Test

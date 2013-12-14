@@ -241,7 +241,7 @@ public class SQLStore<T> extends SQLiteOpenHelper implements Store<T> {
         } else if (serialized.isJsonPrimitive()) {
                 JsonPrimitive primitive = serialized.getAsJsonPrimitive();
                 if (primitive.isBoolean()) {
-                    Integer value = primitive.getAsBoolean() ? 1 : 0;
+                    String value = primitive.getAsBoolean() ? "true" : "false";
                     database.execSQL(sql, new Object[] { path, value, id });
                 } else if (primitive.isNumber()) {
                     Number value = primitive.getAsNumber();
@@ -401,8 +401,8 @@ public class SQLStore<T> extends SQLiteOpenHelper implements Store<T> {
                 if (jsonValue.isJsonPrimitive()) {
                     JsonPrimitive primitive = jsonValue.getAsJsonPrimitive();
                     if (primitive.isBoolean()) {
-                        Integer value = primitive.getAsBoolean() ? 1 : 0;
-                        keyValues.add(new Pair<String, String>(path, value.toString()));
+                        String value = primitive.getAsBoolean() ? "true" : "false";
+                        keyValues.add(new Pair<String, String>(path, value));
                     } else if (primitive.isNumber()) {
                         Number value = primitive.getAsNumber();
                         keyValues.add(new Pair<String, String>(path, value.toString()));
