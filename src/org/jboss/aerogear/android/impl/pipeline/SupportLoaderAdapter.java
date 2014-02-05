@@ -47,6 +47,8 @@ import android.util.Log;
 import com.google.common.base.Objects;
 import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
+import org.jboss.aerogear.android.pipeline.AbstractActivityCallback;
+import org.jboss.aerogear.android.pipeline.AbstractFragmentCallback;
 
 /**
  * This class wraps a Pipe in an asynchronous Loader.
@@ -205,6 +207,7 @@ public class SupportLoaderAdapter<T> implements LoaderPipe<T>, LoaderManager.Loa
         this.idsForNamedPipes.put(name, id);
         Methods method = (Methods) bundle.get(METHOD);
         Callback callback = (Callback) bundle.get(CALLBACK);
+        verifyCallback(callback);
         Loader loader = null;
         switch (method) {
         case READ: {
@@ -346,5 +349,21 @@ public class SupportLoaderAdapter<T> implements LoaderPipe<T>, LoaderManager.Loa
         callback.setFragmentActivity(activity);
         callback.onFailure(exception);
         callback.setFragmentActivity(null);
+    }
+    
+    private void verifyCallback(Callback<List<T>> callback) {
+        if (callback instanceof AbstractFragmentActivityCallback) {
+            if (activity == null) {
+                throw new IllegalStateException("An AbstractFragmentActivityCallback was supplied, but there is no Activity.");
+            }
+        } else if (callback instanceof AbstractSupportFragmentCallback) {
+            if (fragment == null) {
+                throw new IllegalStateException("An AbstractSupportFragmentCallback was supplied, but there is no Fragment.");
+            }
+        } else if (callback instanceof AbstractActivityCallback) {
+            throw new IllegalStateException("An AbstractActivityCallback was supplied, but this is the support Loader.");
+        } else if (callback instanceof AbstractFragmentCallback) {
+            throw new IllegalStateException("An AbstractFragmentCallback was supplied, but this is the support Loader.");
+        }
     }
 }
