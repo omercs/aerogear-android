@@ -28,9 +28,6 @@ import org.jboss.aerogear.android.impl.pipeline.loader.SaveLoader;
 import org.jboss.aerogear.android.pipeline.AbstractActivityCallback;
 import org.jboss.aerogear.android.pipeline.AbstractFragmentCallback;
 import org.jboss.aerogear.android.pipeline.LoaderPipe;
-import static org.jboss.aerogear.android.pipeline.LoaderPipe.CALLBACK;
-import static org.jboss.aerogear.android.pipeline.LoaderPipe.FILTER;
-import static org.jboss.aerogear.android.pipeline.LoaderPipe.METHOD;
 import org.jboss.aerogear.android.pipeline.Pipe;
 import org.jboss.aerogear.android.pipeline.PipeHandler;
 import org.jboss.aerogear.android.pipeline.PipeType;
@@ -52,7 +49,6 @@ import android.util.Log;
 import com.google.common.base.Objects;
 import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
-import static org.jboss.aerogear.android.pipeline.LoaderPipe.ITEM;
 import org.jboss.aerogear.android.pipeline.support.AbstractFragmentActivityCallback;
 import org.jboss.aerogear.android.pipeline.support.AbstractSupportFragmentCallback;
 
