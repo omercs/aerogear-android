@@ -66,6 +66,7 @@ import org.jboss.aerogear.android.pipeline.support.AbstractSupportFragmentCallba
  */
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 @SuppressWarnings( { "rawtypes", "unchecked" })
+@Deprecated
 public class LoaderAdapter<T> implements LoaderPipe<T>,
         LoaderManager.LoaderCallbacks<T> {
 
