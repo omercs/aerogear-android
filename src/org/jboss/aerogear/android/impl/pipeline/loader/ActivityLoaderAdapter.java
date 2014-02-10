@@ -2,8 +2,10 @@ package org.jboss.aerogear.android.impl.pipeline.loader;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.LoaderManager;
 import android.content.Loader;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import org.jboss.aerogear.android.Callback;
 import org.jboss.aerogear.android.pipeline.AbstractActivityCallback;
@@ -23,7 +25,28 @@ import java.util.List;
  */
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 @SuppressWarnings( { "rawtypes", "unchecked" })
-public class ActivityLoaderAdapter<T> extends AbstractLoaderAdapter<T> {
+public class ActivityLoaderAdapter<T> extends AbstractLoaderAdapter<T, LoaderManager, LoaderManager.LoaderCallbacks> {
+
+    private static class ActivityLoaderAdapterOperations extends LoaderManagerOperations<LoaderManager, LoaderManager.LoaderCallbacks> {
+
+
+        ActivityLoaderAdapterOperations(LoaderManager loaderManager) {
+            super(loaderManager);
+        }
+
+        @Override
+        void initLoader(Integer id, Bundle bundle, LoaderManager.LoaderCallbacks callbacks) {
+            this.getLoaderManager().initLoader(id, bundle, callbacks);
+        }
+
+        @Override
+        void reset(Integer id) {
+            Loader<Object> loader = this.getLoaderManager().getLoader(id);
+            if (loader != null) {
+                this.getLoaderManager().destroyLoader(id);
+            }
+        }
+    }
 
     private static final String TAG = ActivityLoaderAdapter.class.getSimpleName();
 
@@ -31,7 +54,7 @@ public class ActivityLoaderAdapter<T> extends AbstractLoaderAdapter<T> {
 
     public ActivityLoaderAdapter(Activity activity, Pipe<T> pipe,
                          String name) {
-        super(name, pipe, activity.getLoaderManager(), activity.getApplicationContext());
+        super(name, pipe, new ActivityLoaderAdapterOperations(activity.getLoaderManager()), activity.getApplicationContext());
         this.activity = activity;
     }
 

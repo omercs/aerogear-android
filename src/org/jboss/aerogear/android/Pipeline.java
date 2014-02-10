@@ -27,6 +27,7 @@ import org.jboss.aerogear.android.impl.pipeline.PipeConfig;
 import org.jboss.aerogear.android.impl.pipeline.SupportLoaderAdapter;
 import org.jboss.aerogear.android.impl.pipeline.loader.ActivityLoaderAdapter;
 import org.jboss.aerogear.android.impl.pipeline.loader.FragmentLoaderAdapter;
+import org.jboss.aerogear.android.impl.pipeline.loader.SupportFragmentLoaderAdapter;
 import org.jboss.aerogear.android.pipeline.LoaderPipe;
 import org.jboss.aerogear.android.pipeline.Pipe;
 import org.jboss.aerogear.android.pipeline.PipeFactory;
@@ -197,7 +198,7 @@ public class Pipeline {
      */
     public LoaderPipe get(String name, android.support.v4.app.Fragment fragment, Context applicationContext) {
         Pipe pipe = pipes.get(name);
-        LoaderPipe adapter = new SupportLoaderAdapter(fragment, applicationContext, pipe, name);
+        LoaderPipe adapter = new SupportFragmentLoaderAdapter(fragment, applicationContext, pipe, name);
         adapter.setLoaderIds(loaderIdsForNamed);
         return adapter;
     }

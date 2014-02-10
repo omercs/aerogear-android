@@ -22,6 +22,7 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import org.jboss.aerogear.android.Callback;
 import org.jboss.aerogear.android.pipeline.AbstractFragmentCallback;
@@ -34,14 +35,34 @@ import java.util.List;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 @SuppressWarnings( { "rawtypes", "unchecked" })
-public class FragmentLoaderAdapter<T> extends AbstractLoaderAdapter<T> implements LoaderPipe<T>, LoaderManager.LoaderCallbacks<T> {
+public class FragmentLoaderAdapter<T> extends AbstractLoaderAdapter<T, LoaderManager, LoaderManager.LoaderCallbacks> implements LoaderPipe<T>, LoaderManager.LoaderCallbacks<T> {
+
+    private static class FragmentLoaderAdapterOperations extends LoaderManagerOperations<LoaderManager, LoaderManager.LoaderCallbacks> {
+
+        FragmentLoaderAdapterOperations(LoaderManager loaderManager) {
+            super(loaderManager);
+        }
+
+        @Override
+        void initLoader(Integer id, Bundle bundle, LoaderManager.LoaderCallbacks callbacks) {
+            this.getLoaderManager().initLoader(id, bundle, callbacks);
+        }
+
+        @Override
+        void reset(Integer id) {
+            Loader<Object> loader = this.getLoaderManager().getLoader(id);
+            if (loader != null) {
+                this.getLoaderManager().destroyLoader(id);
+            }
+        }
+    }
     private static final String TAG = FragmentLoaderAdapter.class.getSimpleName();
 
     private Fragment fragment;
 
     public FragmentLoaderAdapter(Fragment fragment, Context applicationContext,
                          Pipe<T> pipe, String name) {
-        super(name, pipe, fragment.getLoaderManager(), applicationContext);
+        super(name, pipe, new FragmentLoaderAdapterOperations(fragment.getLoaderManager()), applicationContext);
         this.fragment = fragment;
     }
 

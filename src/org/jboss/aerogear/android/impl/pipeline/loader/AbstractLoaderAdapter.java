@@ -26,19 +26,21 @@ import java.util.List;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 @SuppressWarnings( { "rawtypes", "unchecked" })
-public abstract class AbstractLoaderAdapter<T> implements LoaderPipe<T>, LoaderManager.LoaderCallbacks<T> {
+public abstract class AbstractLoaderAdapter<T, K, L> implements LoaderPipe<T>, LoaderManager.LoaderCallbacks<T> {
+
+    private final LoaderManagerOperations<K, L> loaderManagerOperations;
+
     protected final Handler handler;
     protected final Pipe<T> pipe;
-    protected final LoaderManager manager;
     protected final String name;
     protected final RequestBuilder<T> requestBuilder;
     protected final ResponseParser<T> responseParser;
     protected final Context applicationContext;
     protected Multimap<String, Integer> idsForNamedPipes;
 
-    public AbstractLoaderAdapter(String name, Pipe<T> pipe, LoaderManager loaderManager, Context applicationContext) {
+    public AbstractLoaderAdapter(String name, Pipe<T> pipe, LoaderManagerOperations<K, L> loaderManagerOperations, Context applicationContext) {
+        this.loaderManagerOperations = loaderManagerOperations;
         this.handler = new Handler(Looper.getMainLooper());
-        this.manager = loaderManager;
         this.requestBuilder = pipe.getRequestBuilder();
         this.responseParser = pipe.getResponseParser();
         this.name = name;
@@ -63,7 +65,7 @@ public abstract class AbstractLoaderAdapter<T> implements LoaderPipe<T>, LoaderM
         bundle.putSerializable(CALLBACK, callback);
         bundle.putSerializable(FILTER, null);
         bundle.putSerializable(METHOD, Methods.READ);
-        manager.initLoader(id, bundle, this);
+        loaderManagerOperations.initLoader(id, bundle, (L) this);
     }
 
     @Override
@@ -78,7 +80,7 @@ public abstract class AbstractLoaderAdapter<T> implements LoaderPipe<T>, LoaderM
         bundle.putSerializable(CALLBACK, callback);
         bundle.putSerializable(FILTER, filter);
         bundle.putSerializable(METHOD, Methods.READ);
-        manager.initLoader(id, bundle, this);
+        loaderManagerOperations.initLoader(id, bundle, (L) this);
     }
 
     @Override
@@ -90,7 +92,7 @@ public abstract class AbstractLoaderAdapter<T> implements LoaderPipe<T>, LoaderM
         // serializable, but it
         // has to be gsonable
         bundle.putSerializable(METHOD, Methods.SAVE);
-        manager.initLoader(id, bundle, this);
+        loaderManagerOperations.initLoader(id, bundle, (L) this);
     }
 
     @Override
@@ -100,7 +102,7 @@ public abstract class AbstractLoaderAdapter<T> implements LoaderPipe<T>, LoaderM
         bundle.putSerializable(CALLBACK, callback);
         bundle.putSerializable(REMOVE_ID, toRemoveId);
         bundle.putSerializable(METHOD, Methods.REMOVE);
-        manager.initLoader(id, bundle, this);
+        loaderManagerOperations.initLoader(id, bundle, (L) this);
     }
 
     @Override
@@ -132,10 +134,7 @@ public abstract class AbstractLoaderAdapter<T> implements LoaderPipe<T>, LoaderM
     @Override
     public void reset() {
         for (Integer id : idsForNamedPipes.get(name)) {
-            Loader loader = manager.getLoader(id);
-            if (loader != null) {
-                manager.destroyLoader(id);
-            }
+            loaderManagerOperations.reset(id);
         }
         idsForNamedPipes.removeAll(name);
     }
